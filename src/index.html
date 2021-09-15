@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Totoro WeatherApp provides you with weather forecast based on OpenWeather API data - one of the most accurate weather APIs."
+    />
+    <meta name="keywords" content="weather, forecast, totoro" />
+    <meta name="author" content="Jessica Daniela O. Falcon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/style.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnMPWcmFo_Je-QnkZBUUNyIlaqwyBIBco&libraries=places"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-2SX76R414Y"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-2SX76R414Y");
+    </script>
+    <title>Totoro Weather App</title>
+  </head>
+
+  <body id="body">
+    <div id="preloader">
+      <img src="https://raw.githubusercontent.com/Anna2049/totoro-weather-app/main/media/loaders/preloader-soot.gif" />
+      <div class="loader-text">Loading...</div>
+    </div>
+
+    <div id="loader-fetching">
+      <img src="https://raw.githubusercontent.com/Anna2049/totoro-weather-app/main/media/loaders/loader-toto.gif" />
+      <div class="loader-text">
+        Fetching data <br />
+        Please wait...
+      </div>
+    </div>
+
+    <div id="loader-nothing-to-search">
+      <img src="https://raw.githubusercontent.com/Anna2049/totoro-weather-app/main/media/loaders/loader-toto2.gif" />
+      <div class="loader-text">Empty search...</div>
+    </div>
+
+    <img class="main-theme" id="mainTheme" src="" />
+
+    <img src="" id="front-layer" class="front-layer hidden" />
+
+    <div id="clouds-placeholder" class="hidden">
+      <div id="carousel-clouds" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div
+            id="carousel-item1"
+            class="carousel-item active"
+            data-bs-interval="1"
+          >
+            <img
+              id="carousel-cloud1"
+              class="d-block w-100"
+              src="media/front-layers/clouds1.png"
+            />
+          </div>
+
+          <div id="carousel-item2" class="carousel-item" data-bs-interval="1">
+            <img
+              id="carousel-cloud2"
+              class="d-block w-100"
+              src="media/front-layers/clouds2.png"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container search">
+      <form class="input-group" id="search-city-form">
+        <button
+          type="button"
+          class="btn btn-outline-secondary dynamic-font"
+          id="button-settings"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasStart"
+          aria-controls="offcanvasStart"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-secondary dynamic-font"
+          id="button-location-gps"
+        >
+          <i class="fas fa-map-marker-alt"></i>
+        </button>
+        <input
+          type="text"
+          class="form-control"
+          id="city-input"
+          placeholder="Enter your city"
+          onfocus="this.value=''"
+          required
+        />
+
+        <input
+          id="submit"
+          type="submit"
+          class="btn btn-outline-secondary dynamic-font"
+          value="Search"
+        />
+      </form>
+    </div>
+    <h1 class="d-none">Totoro Weather App: Weather Forecast</h1>
+    <div class="container main-info dynamic-font">
+      <div id="temp-main">
+        <span id="current-temperature" class="t"></span
+        ><small class="uom-temp"></small>
+      </div>
+      <h2 id="current-city"></h2>
+      <h3 id="date-and-time"></h3>
+      <h3 id="current-description"></h3>
+    </div>
+
+    <div class="container dynamic-font" id="current-weather-indices">
+      <div class="row g-0">
+        <div class="col-2">
+          <i class="fas fa-temperature-high"></i
+          ><i class="fas fa-temperature-low"></i>
+        </div>
+        <div class="col-2">
+          <span id="temp-max" class="t"></span> /
+          <span id="temp-min" class="t"></span>
+        </div>
+        <div class="col-2 uom-temp"></div>
+
+        <div class="col-2"><i class="fas fa-cloud"></i></div>
+        <div class="col-2" id="cloudiness"></div>
+        <div class="col-2">%</div>
+
+        <div class="col-2"><i class="fas fa-tshirt"></i></div>
+        <div class="col-2 t" id="feels-like"></div>
+        <div class="col-2 uom-temp"></div>
+
+        <div class="col-2"><i class="fas fa-tachometer-alt"></i></div>
+        <div class="col-2" id="pressure"></div>
+        <div class="col-2">hPa</div>
+
+        <div class="col-2">
+          <i class="fas fa-tint"></i>
+        </div>
+        <div class="col-2" id="humidity"></div>
+        <div class="col-2">%</div>
+
+        <div class="col-2"><i class="fas fa-wind"></i></div>
+        <div class="col-2" id="wind"></div>
+        <div class="col-2 uom-speed"></div>
+
+        <div class="col-2">
+          <i class="fas fa-sun"></i><i class="fas fa-angle-double-up"></i>
+        </div>
+        <div class="col-4" id="sunrise"></div>
+        <div class="col-2">
+          <i class="fas fa-sun"></i><i class="fas fa-angle-double-down"></i>
+        </div>
+        <div class="col-4" id="sunset"></div>
+      </div>
+    </div>
+
+    <div class="container dynamic-font" id="forecast-hourly"></div>
+
+    <div class="container">
+      <img id="hr-image" src="" alt="" class="image-six-chibi" />
+    </div>
+
+    <div class="container dynamic-font forecast-week">
+      <h4>
+        Weekly:
+        <a href="#" class="clickables" id="button-week-brief">Brief</a>
+        |
+        <a href="#" class="clickables" id="button-week-detailed">Detailed</a>
+      </h4>
+      <hr />
+      <div
+        class="scrolling-wrapper"
+        id="forecast-week-brief"
+        style="display: none"
+      ></div>
+      <div
+        class="dynamic-font"
+        id="weekday-detailed"
+        style="display: none"
+      ></div>
+    </div>
+
+    <div
+      class="offcanvas offcanvas-start"
+      tabindex="-1"
+      id="offcanvasStart"
+      aria-labelledby="offcanvasStartLabel"
+    >
+      <div class="offcanvas-header">
+        <h4 id="offcanvasStartLabel">Settings:</h4>
+
+        <button
+          type="button"
+          class="btn-close text-reset"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="settings">
+          <label for="themes">Theme:</label>
+          <select id="theme-preferred" class="">
+            <option value="nature">Nature</option>
+            <option value="city">City</option>
+            <option value="minimalistic" disabled>Minimalistic</option>
+          </select>
+
+          <label for="units">Units:</label>
+          <select id="units-preferred" class="">
+            <option value="metric">Metric</option>
+            <option value="imperial">Imperial</option>
+          </select>
+
+          <br />
+
+          <label for="cities">Saved GPS location:</label>
+          <input id="saved-location" disabled />
+
+          <div>
+            <small
+              ><i
+                >* new settings are applied starting from next search</i
+              ></small
+            >
+          </div>
+        </div>
+
+        <hr />
+
+        <h4>Icons meaning: Current</h4>
+        <div class="container icons-explanation">
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-temperature-high"></i>
+            </div>
+            <div class="col-4">Temp max</div>
+            <div class="col-2">
+              <i class="fas fa-temperature-low"></i>
+            </div>
+            <div class="col-4">Temp min</div>
+            <div class="col-2"><i class="fas fa-tshirt"></i></div>
+            <div class="col-4">Feels like</div>
+            <div class="col-2"><i class="fas fa-cloud"></i></div>
+            <div class="col-4">Cloudiness</div>
+            <div class="col-2"><i class="fas fa-tachometer-alt"></i></div>
+            <div class="col-4">Pressure</div>
+            <div class="col-2">
+              <i class="fas fa-tint"></i>
+            </div>
+            <div class="col-4">Humidity</div>
+            <div class="col-2"><i class="fas fa-wind"></i></div>
+            <div class="col-4">Wind</div>
+            <div class="col-2"><i class="fas fa-eye"></i></div>
+            <div class="col-4">Visibility</div>
+            <div class="col-2">
+              <i class="fas fa-sun"></i><i class="fas fa-angle-double-up"></i>
+            </div>
+            <div class="col-4">Sunrise</div>
+            <div class="col-2">
+              <i class="fas fa-sun"></i><i class="fas fa-angle-double-down"></i>
+            </div>
+            <div class="col-4">Sunset</div>
+          </div>
+        </div>
+        <hr />
+        <h4>Icons meaning: Forecasts</h4>
+        <div class="container icons-explanation">
+          <div class="row g-0 align-items-center api-icons-explanation">
+            <div class="col-1">
+              <img src="https://openweathermap.org/img/wn/01d@2x.png" />
+            </div>
+            <div class="col-1">
+              <img src="https://openweathermap.org/img/wn/01n@2x.png" />
+            </div>
+            <div class="col-4">Clear sky</div>
+            <div class="col-1">
+              <img src="https://openweathermap.org/img/wn/02d@2x.png" />
+            </div>
+            <div class="col-1">
+              <img src="https://openweathermap.org/img/wn/02n@2x.png" />
+            </div>
+            <div class="col-4">Few clouds</div>
+            <div class="col-2">
+              <img src="https://openweathermap.org/img/wn/03d@2x.png" />
+            </div>
+            <div class="col-4">Scattered clouds</div>
+            <div class="col-2">
+              <img src="https://openweathermap.org/img/wn/04d@2x.png" />
+            </div>
+            <div class="col-4">Broken clouds</div>
+            <div class="col-2">
+              <img src="https://openweathermap.org/img/wn/09d@2x.png" />
+            </div>
+            <div class="col-4">Shower rain</div>
+            <div class="col-1">
+              <img src="https://openweathermap.org/img/wn/10d@2x.png" />
+            </div>
+            <div class="col-1">
+              <img src="https://openweathermap.org/img/wn/10n@2x.png" />
+            </div>
+            <div class="col-4">Rain</div>
+            <div class="col-2">
+              <img src="https://openweathermap.org/img/wn/11d@2x.png" />
+            </div>
+            <div class="col-4">Thunderstorm</div>
+            <div class="col-2">
+              <img src="https://openweathermap.org/img/wn/13d@2x.png" />
+            </div>
+            <div class="col-4">Snow</div>
+            <div class="col-2">
+              <img src="https://openweathermap.org/img/wn/50d@2x.png" />
+            </div>
+            <div class="col-4">Mist</div>
+          </div>
+        </div>
+
+        <footer>
+          <img src="https://raw.githubusercontent.com/Anna2049/totoro-weather-app/main/media/footer.png" class="https://raw.githubusercontent.com/Anna2049/totoro-weather-app/main/media/footer.png" />
+          <br />
+          <a
+            href="https://github.com/Anna2049/totoro-weather-app"
+            class="source-code clickables"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Open a source code</a
+          >
+          <p>
+            by Daniela Falcon
+            <a
+              id="linkedin"
+              href="https://www.linkedin.com/in/jdanielaofalcon/"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+          </p>
+        </footer>
+      </div>
+    </div>
+
+    <script
+      src="https://kit.fontawesome.com/a5036b286c.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="src/script.js"></script>
+  </body>
+</html>
