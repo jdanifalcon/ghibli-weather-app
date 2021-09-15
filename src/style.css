@@ -1,0 +1,420 @@
+@media (max-width: 1024px) {
+    html {
+      width: 100vw;
+      font-size: 100%;
+    }
+    .main-theme,
+    .front-layer,
+    #loader-fetching,
+    #loader-nothing-to-search,
+    #preloader,
+    .loader-text {
+      width: 100vw;
+      height: 100vh;
+      margin: auto;
+    }
+    .image-six-chibi {
+      width: 95vw;
+      margin: 0 0 -5vw -3vw;
+    }
+    .container {
+      max-width: none;
+      width: 90vw;
+      margin: 5vw auto;
+      padding: 0;
+    }
+  
+    #temp-main {
+      font-size: 28vw;
+    }
+    h2 {
+      font-size: 10vw;
+      line-height: 11vw; /*   */
+    }
+    h3 {
+      font-size: 6.5vw;
+    }
+    h4 {
+      font-size: 6vw;
+    }
+    #temp-main small {
+      font-size: 9.5vw;
+      top: -13vw;
+    }
+  
+    .search #button-settings,
+    .search #button-location-gps,
+    .search #submit,
+    #current-weather-indices,
+    #forecast-hourly,
+    #forecast-week-brief,
+    #weekday-detailed,
+    .accordion-button,
+    .offcanvas .settings,
+    #linkedin {
+      font-size: 5vw;
+    }
+    .card,
+    .search #button-settings {
+      margin-right: 1vw;
+    }
+    .search #button-settings,
+    .search #button-location-gps {
+      width: 11vw;
+    }
+    .search #submit {
+      width: 20vw;
+    }
+    .offcanvas .icons-explanation,
+    .accordion-body .index,
+    .offcanvas-body footer {
+      font-size: 4vw;
+    }
+    .accordion-body .text,
+    .loader-text {
+      font-size: 3.5vw;
+    }
+    .accordion button img {
+      width: 15vw;
+    }
+    .accordion-body .iconify {
+      font-size: 7.5vw;
+    }
+    .accordion-body {
+      width: 90vw;
+      margin: 0;
+      line-height: 8.5vw;
+      padding: 1rem 0.5rem 1rem 1.25rem;
+    }
+    .accordion-body .row > * {
+      padding: 0 0 0 1.1vw;
+    }
+    .forecast-week {
+      padding-bottom: 5vh;
+    }
+    .offcanvas .icons-explanation {
+      width: 100vw;
+    }
+    .offcanvas .icons-explanation .row {
+      --bs-gutter-x: 0.5rem;
+    }
+    .offcanvas .icons-explanation img {
+      width: 14vw;
+      margin: -3.5vw 0 -3.5vw -5vw;
+      display: inline-block;
+    }
+    .offcanvas .settings select {
+      max-width: 20vw;
+      margin-left: 0.5vw;
+    }
+    .offcanvas .settings input {
+      max-width: 50vw;
+      margin-left: 1vw;
+    }
+  }
+  @media (min-width: 1025px) {
+    body,
+    .main-theme,
+    .front-layer,
+    #preloader,
+    #loader-fetching,
+    #loader-nothing-to-search,
+    .loader-text {
+      width: 500px;
+      height: 100vh;
+      margin: auto;
+    }
+    .image-six-chibi {
+      width: 100%;
+      margin-bottom: -20px;
+    }
+    .container {
+      max-width: 90%;
+      margin: 10px auto;
+      padding: 0;
+    }
+  
+    #temp-main {
+      font-size: 100px;
+    }
+    h2 {
+      font-size: 40px;
+      line-height: 44px; /*   */
+    }
+    h3 {
+      font-size: 30px;
+    }
+    h4 {
+      font-size: 25px;
+    }
+    #temp-main small {
+      font-size: 30px;
+      top: -45px;
+    }
+  
+    .search #button-settings,
+    .search #button-location-gps,
+    .search #submit,
+    #current-weather-indices,
+    #forecast-hourly,
+    #forecast-week-brief,
+    #weekday-detailed,
+    .accordion-button,
+    #linkedin {
+      font-size: 20px;
+    }
+    .card,
+    .search #button-settings {
+      margin-right: 5px;
+    }
+    .search #button-settings,
+    .search #button-location-gps {
+      width: 40px;
+    }
+    .search #submit {
+      width: 80px;
+    }
+  
+    .loader-text,
+    .accordion-body .index,
+    .offcanvas-body footer {
+      font-size: 15px;
+    }
+  
+    .accordion button img {
+      width: 80px;
+      margin-top: -5px;
+      margin-bottom: -5px;
+    }
+    .accordion-body .text {
+      font-size: 15px;
+    }
+    .accordion-body .iconify {
+      font-size: 35px;
+    }
+    .accordion-body {
+      width: 100%;
+      margin: 0;
+      line-height: 40px;
+    }
+    .accordion-body .iconify {
+      font-size: 35px;
+    }
+    .accordion-body {
+      padding: 1rem 0 1rem 2.25rem;
+    }
+    .accordion-body .row > * {
+      padding: 0 0 0 10px;
+    }
+    .forecast-week {
+      padding-bottom: 70px;
+    }
+    .offcanvas-body .api-icons-explanation img {
+      width: 3em;
+      margin: -0.8em;
+    }
+  }
+  
+  body {
+    font-family: "Oswald", sans-serif;
+  }
+  #temp-main {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  a {
+    text-decoration: none;
+    color: unset;
+  }
+  
+  a :hover,
+  .clickables:hover {
+    cursor: pointer;
+    font-size: larger;
+    opacity: 80%;
+    color: unset;
+  }
+  
+  #temp-main,
+  h2,
+  h3,
+  h4,
+  #current-weather-indices .fas,
+  #preloader img {
+    opacity: 80%;
+  }
+  
+  #temp-main:first-letter,
+  h3:first-letter {
+    text-transform: capitalize;
+  }
+  
+  h4,
+  p {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  .search button {
+    padding: 0;
+    text-align: center;
+  }
+  .main-theme,
+  .front-layer {
+    position: fixed;
+    top: 0;
+    z-index: -1;
+    opacity: 85%;
+    border: 1px solid lightgray;
+  }
+  
+  .scrolling-wrapper {
+    overflow: auto;
+    white-space: nowrap;
+  }
+  
+  .image-six-chibi {
+    opacity: 90%;
+  }
+  
+  .search #button-settings {
+    border-radius: 4px;
+  }
+  .search #button-location-gps {
+    border-radius: 4px 0px 0px 4px;
+  }
+  .search #city-input {
+    z-index: 1;
+  }
+  #temp-main small {
+    position: relative;
+  }
+  
+  .card {
+    display: inline-block;
+    text-align: center;
+    width: 16%;
+  }
+  
+  .image-weather-small {
+    display: inline-block;
+    max-width: 80%;
+  }
+  
+  #current-weather-indices,
+  .card,
+  .accordion-button:not(.collapsed),
+  .accordion-item {
+    background-color: rgba(203, 207, 207, 0.6);
+  }
+  .accordion-button {
+    background-color: rgba(203, 207, 207, 0.1);
+  }
+  
+  .center,
+  .accordion-button .image {
+    text-align: center;
+  }
+  #current-weather-indices {
+    border-radius: 4px;
+    padding: 12px;
+  }
+  .offcanvas h4 {
+    text-align: left;
+    margin-bottom: 0;
+  }
+  .offcanvas-body footer {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .offcanvas-body footer .image-footer {
+    width: 10vh;
+  }
+  .offcanvas-body select {
+    margin-bottom: 10px;
+    margin-right: 15px;
+    width: 30%;
+  }
+  .offcanvas .container {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  .offcanvas-body #linkedin {
+    color: #0a66c2;
+  }
+  .front-layer {
+    z-index: -1;
+  }
+  .carousel-inner {
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+  }
+  .carousel-item img {
+    height: 40vh;
+  }
+  
+  #preloader {
+    display: block;
+  }
+  #loader-fetching,
+  #loader-nothing-to-search {
+    display: none;
+  }
+  #loader-fetching,
+  #loader-nothing-to-search,
+  #preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      117.9deg,
+      rgb(183, 248, 193) -3.5%,
+      rgb(169, 212, 250) 53.8%,
+      rgb(148, 231, 255) 100.4%
+    );
+    z-index: 1;
+  }
+  #loader-fetching img,
+  #preloader img,
+  #loader-nothing-to-search img {
+    height: 25vh;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  .loader-text {
+    font-family: "Press Start 2P", cursive;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.7);
+    text-shadow: 2px 2px 2px whitesmoke;
+    text-align: center;
+    margin-top: 65vh;
+  }
+  #weekday-detailed button {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .visible {
+    visibility: visible;
+  }
+  .hidden {
+    visibility: hidden;
+  }
+  /*.offcanvas {
+    background-color: rgb(226, 248, 232);
+  }*/
+  .offcanvas .icons-explanation .col-4 {
+    padding: 0;
+  }
+  .offcanvas .icons-explanation .col-2 {
+    display: inline-block;
+    text-align: center;
+  }
